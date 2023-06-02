@@ -4,8 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        template_night: "#4A0678",
-        neutral_gray: "",
+        light_purple: "#ab00ff",
+        medium_purple: "#8300c4",
+        dark_purple: "#4c00a4",
+        medium_purple_blue: "#33007b",
+        dark_purple_blue: "#31004a",
       },
       fontFamily: {
         sans: ["Your Font Name", "Helvetica", "Arial", "sans-serif"],

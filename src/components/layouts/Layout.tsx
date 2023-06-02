@@ -9,12 +9,12 @@ interface LayoutProps {
 
 const Layout: FC<LayoutProps> = ({ children }) => {
   return (
-    <>
+    <div className="app bg-[#BAA5D9] rounded-2xl">
       <Header />
       <Navbar />
       {children}
       <Footer />
-    </>
+    </div>
   );
 };
 

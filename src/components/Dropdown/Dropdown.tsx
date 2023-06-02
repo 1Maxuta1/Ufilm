@@ -5,19 +5,23 @@ interface DropdownProps {
   title: string;
   options: string[];
 }
+
 const Dropdown: React.FC<DropdownProps> = ({ title, options }) => {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [openSection, setOpenSection] = React.useState("");
 
-  const handleMouseEnter = () => {
-    setIsOpen(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsOpen(false);
+  const handleMouse = (section: string) => {
+    if (openSection === section) {
+      setOpenSection(section); // Потім повернути ""
+    } else {
+      setOpenSection(section);
+      if (openSection !== "") {
+        setOpenSection("");
+      }
+    }
   };
 
   return (
-    <div className="relative inline-block text-left">
+    <div className="relative inline-block text-center">
       <div>
         <button
           type="button"
@@ -25,42 +29,29 @@ const Dropdown: React.FC<DropdownProps> = ({ title, options }) => {
           id="options-menu"
           aria-haspopup="true"
           aria-expanded="true"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          onClick={() => handleMouse(title)}
+          // on={() => handleMouseLeave(title)}
         >
           {title}
-          <svg
-            className="-mr-1 ml-2 h-5 w-5"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              fillRule="evenodd"
-              d="M10 12a2 2 0 100-4 2 2 0 000 4z"
-              clipRule="evenodd"
-            />
-          </svg>
         </button>
       </div>
 
-      {isOpen && (
+      {openSection === title && (
         <div
-          className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+          className=" w-[500%] absolute  top-auto mt-2  rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="options-menu"
         >
-          <div className="py-1" role="none">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-3">
             {options.map((option) => (
               <Link
                 to={`/${option}`}
                 key={option}
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 role="menuitem"
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
+                onClick={() => handleMouse(title)}
+                // onMouseLeave={() => handleMouseLeave(title)}
               >
                 {option}
               </Link>

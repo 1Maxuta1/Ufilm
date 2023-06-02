@@ -7,22 +7,41 @@ function DarkModeButton() {
   const handleModeToggle = () => {
     setDarkMode(!darkMode);
     const body = document.getElementsByTagName("body")[0];
+    const app = document.getElementsByTagName("app")[0];
+    const header = document.getElementsByTagName("header")[0];
     if (darkMode) {
-      body.classList.remove("bg-template_night");
-      body.classList.add("bg-white");
+      body.classList.remove("bg-dark_purple");
+      body.classList.add("bg-antiquewhite;");
     } else {
-      body.classList.remove("bg-white");
-      body.classList.add("bg-template_night");
+      body.classList.remove("bg-antiquewhite;");
+      body.classList.add("bg-dark_purple");
     }
-    body.style.transition = "background-color 0.6s ease-in-out   ";
+    body.style.transition = "background-color 0.6s ease-in-out";
+    //   if (darkMode) {
+    //     app.classList.remove("bg-medium_purple");
+    //     app.classList.add("bg-antiquewhite;");
+    //   } else {
+    //     app.classList.remove("bg-antiquewhite;");
+    //     app.classList.add("bg-medium_purple");
+    //   }
+    //   (app as HTMLElement).style.transition = "background-color 0.6s ease-in-out";
+    //   if (darkMode) {
+    //     header.classList.remove("bg-#9593BA");
+    //     header.classList.add("bg-#4C4B5E;");
+    //   } else {
+    //     header.classList.remove("bg-#4C4B5E;");
+    //     header.classList.add("bg-#9593BA");
+    //   }
+    //   (header as HTMLElement).style.transition =
+    //     "background-color 0.6s ease-in-out";
   };
 
   return (
     <div
       className={`  ${
         darkMode
-          ? " transition duration-600 ease-in-out bg-template_night text-white"
-          : "  bg-white text-gray-900 transition duration-600 ease-in-out"
+          ? " transition duration-600 ease-in-out bg-dark_purple text-white"
+          : "  bg-antiquewhite; text-gray-900 transition duration-600 ease-in-out"
       }`}
     >
       <button

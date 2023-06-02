@@ -3,7 +3,7 @@ import { AiFillTwitterCircle, AiFillYoutube } from "react-icons/ai";
 
 const Footer: React.FC = ({}) => {
   return (
-    <footer className="bg-[#9C4AD4] px-4 py-2 flex flex-col sm:flex-row items-center justify-between">
+    <footer className="bg-[#9C4AD4] px-4 py-2 flex flex-col sm:flex-row items-center justify-between rounded-b-2xl">
       <nav className="flex flex-wrap justify-center sm:justify-start">
         <a
           href="#"
