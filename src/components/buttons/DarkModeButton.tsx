@@ -1,15 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
+import { useLocalStorage } from "usehooks-ts";
 
 function DarkModeButton() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [isDarkTheme, setDarkTheme] = useLocalStorage("darkTheme", true);
 
+  const toggleTheme = () => {
+    setDarkTheme((prevValue: boolean) => !prevValue);
+  };
+  useEffect(() => {
+    const body = document.getElementsByTagName("body")[0];
+    if (!isDarkTheme) {
+      body.classList.remove("bg-dark_purple");
+      body.classList.add("bg-antiquewhite;");
+    } else {
+      body.classList.remove("bg-antiquewhite;");
+      body.classList.add("bg-dark_purple");
+    }
+    body.style.transition = "background-color 0.6s ease-in-out";
+  }, [isDarkTheme]);
   const handleModeToggle = () => {
-    setDarkMode(!darkMode);
+    setDarkTheme(!isDarkTheme);
     const body = document.getElementsByTagName("body")[0];
     const app = document.getElementsByTagName("app")[0];
     const header = document.getElementsByTagName("header")[0];
-    if (darkMode) {
+    if (isDarkTheme) {
       body.classList.remove("bg-dark_purple");
       body.classList.add("bg-antiquewhite;");
     } else {
@@ -37,21 +52,13 @@ function DarkModeButton() {
   };
 
   return (
-    <div
-      className={`  ${
-        darkMode
-          ? " transition duration-600 ease-in-out bg-dark_purple text-white"
-          : "  bg-antiquewhite; text-gray-900 transition duration-600 ease-in-out"
-      }`}
+    <button
+      className="flex items-center justify-center px-4 py-2 rounded-lg bg-gray-300 text-gray-900 hover:bg-gray-400 focus:outline-none  transition-colors"
+      onClick={handleModeToggle}
     >
-      <button
-        className="flex items-center justify-center px-4 py-2 rounded-lg bg-gray-300 text-gray-900 hover:bg-gray-400 focus:outline-none  transition-colors"
-        onClick={handleModeToggle}
-      >
-        {darkMode ? <FaSun className="mr-2" /> : <FaMoon className="mr-2" />}
-        {darkMode ? "Світла тема" : "Темна тема"}
-      </button>
-    </div>
+      {isDarkTheme ? <FaSun className="mr-2" /> : <FaMoon className="mr-2" />}
+      {isDarkTheme ? "Світла тема" : "Темна тема"}
+    </button>
   );
 }
 

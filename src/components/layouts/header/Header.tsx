@@ -53,12 +53,12 @@ const Header: React.FC = () => {
           />
         </Link>
 
-        <div className="w-12">
+        <div className=" flex gap-3">
           {currentUser == null ? (
             <>
               <a
                 href="#"
-                className="inline-flex gap-1 bg-[#BAA5D9] opacity-50 rounded-md items-center"
+                className="inline-flex px-2 py-1 gap-1 bg-[#BAA5D9] opacity-50 rounded-md items-center"
                 onClick={handleLoginClick}
               >
                 Вхід
@@ -83,7 +83,7 @@ const Header: React.FC = () => {
               </a>
               <a
                 href="#"
-                className="bg-[#BAA5D9] opacity-50 rounded-md"
+                className=" px-2 py-1 bg-[#BAA5D9] opacity-50 rounded-md"
                 onClick={handleRegistrationClick}
               >
                 Реєстрація

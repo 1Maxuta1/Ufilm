@@ -11,7 +11,7 @@ const Dropdown: React.FC<DropdownProps> = ({ title, options }) => {
 
   const handleMouse = (section: string) => {
     if (openSection === section) {
-      setOpenSection(section); // Потім повернути ""
+      setOpenSection(""); // Потім повернути ""
     } else {
       setOpenSection(section);
       if (openSection !== "") {
@@ -29,7 +29,8 @@ const Dropdown: React.FC<DropdownProps> = ({ title, options }) => {
           id="options-menu"
           aria-haspopup="true"
           aria-expanded="true"
-          onClick={() => handleMouse(title)}
+          onMouseOut={() => setOpenSection("")}
+          onMouseOver={() => handleMouse(title)}
           // on={() => handleMouseLeave(title)}
         >
           {title}

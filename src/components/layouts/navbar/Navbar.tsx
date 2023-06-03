@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { NavbarGenre, navbarGenres } from "../../../types/types.ts";
+import { NavbarGenre } from "../../../types/types.ts";
+import { navbarGenres } from "../../../constants/navbar.ts";
 import Dropdown from "../../Dropdown/Dropdown.js";
 import SearchBar from "../../buttons/SearchBar.tsx";
 

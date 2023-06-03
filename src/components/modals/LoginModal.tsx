@@ -25,13 +25,12 @@ const LoginModal = ({ showLoginModal, setShowLoginModal }: ILoginModal) => {
 
   return showLoginModal ? (
     <div className="fixed inset-0 flex items-center justify-center z-50 ">
-      <div className="bg-white rounded-lg p-8">
+      <div className=" relative bg-white rounded-lg p-8">
         <button
-          className="h-6 w-6 bg-red-800 text-white rounded-full"
+          className="absolute right-5 top-4 h-6 w-6 bg-red-800 text-white rounded-full flex justify-center items-center"
           onClick={() => setShowLoginModal(false)}
         >
           <svg
-            className="flex justify-center "
             stroke="currentColor"
             fill="currentColor"
             strokeWidth="0"
@@ -51,7 +50,7 @@ const LoginModal = ({ showLoginModal, setShowLoginModal }: ILoginModal) => {
         <h2 className="text-2xl mb-4">Вхід на сайт</h2>
         <form onSubmit={formik.handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="loginEmail">Логін або email</label>
+            <label htmlFor="loginEmail">Email</label>
             <input
               type="text"
               id="loginEmail"
