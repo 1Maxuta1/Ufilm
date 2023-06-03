@@ -1,4 +1,4 @@
-import { NavbarGenre } from "../types/types.ts";
+import { NavbarGenre } from "../types/types";
 export const navbarGenres: NavbarGenre[] = [
   {
     title: "Серіали",

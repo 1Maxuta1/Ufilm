@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { NavbarGenre } from "../../../types/types.ts";
-import { navbarGenres } from "../../../constants/navbar.ts";
-import Dropdown from "../../Dropdown/Dropdown.js";
-import SearchBar from "../../buttons/SearchBar.tsx";
+import { NavbarGenre } from "../../../types/types";
+import { navbarGenres } from "../../../constants/navbar";
+import Dropdown from "../../Dropdown/Dropdown";
+import SearchBar from "../../buttons/SearchBar";
 
 const Navbar: React.FC = () => {
   return (
