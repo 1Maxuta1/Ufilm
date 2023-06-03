@@ -2,7 +2,6 @@
   "compilerOptions": {
     "allowImportingTsExtensions": true,
     "sourceMap": true,
-    "watch": true,
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
