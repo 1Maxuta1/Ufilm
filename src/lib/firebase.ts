@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { EmailAuthProvider, GoogleAuthProvider } from "firebase/auth";
-
+import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -14,9 +14,10 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_APP_ID,
   measurementId: import.meta.env.VITE_MEASUREMENT_ID,
 };
-console.log(firebaseConfig)
+console.log(firebaseConfig);
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
 export const analytics = getAnalytics(app);
 export const googleAuthProvider = new GoogleAuthProvider();
 export const emailAuthProvider = new EmailAuthProvider();

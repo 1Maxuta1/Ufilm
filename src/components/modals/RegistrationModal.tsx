@@ -1,64 +1,41 @@
+import { useFormik } from "formik";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { createFBUser } from "../../utils/createFBUser";
+import { createFirestoreUser } from "../../utils/createFirestoreUser";
 
-const LoginModal = () => {
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showRegistrationModal, setShowRegistrationModal] = useState(false);
-  const [loginEmail, setLoginEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [validationError, setValidationError] = useState(false);
-  const [loginNickname, setloginNickname] = useState("");
+interface IRegistrationModal {
+  showRegistrationModal: boolean;
+  setShowRegistrationModal: React.Dispatch<boolean>;
+}
 
-  const handleLoginClick = () => {
-    setShowLoginModal(true);
-  };
+const RegistrationModal = ({
+  showRegistrationModal,
+  setShowRegistrationModal,
+}: IRegistrationModal) => {
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+      nickname: "",
+    },
+    onSubmit: async (values) => {
+      const response = await createFBUser(values.email, values.password);
+      if (response !== null) {
+        // хорошо бы через react toastify добавить ошибки при неполадках с валидацией
+        createFirestoreUser({ email: values.email, nickname: values.nickname });
+      }
+      formik.resetForm();
+      setShowRegistrationModal(false);
+    },
+  });
 
-  const handleRegistrationClick = () => {
-    setShowRegistrationModal(true);
-  };
-
-  const closeModal = () => {
-    setShowLoginModal(false);
-    setShowRegistrationModal(false);
-    setValidationError(false);
-  };
-
-  const handleLoginSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Perform validation
-    if (loginEmail.trim() === "" || password.trim() === "") {
-      setValidationError(true);
-      return;
-    }
-
-    // Handle login logic here
-
-    // Reset form
-    setLoginEmail("");
-    setloginNickname("");
-    setPassword("");
-    setValidationError(false);
-    setShowLoginModal(false);
-  };
-
-  const handleRegistrationSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Perform registration logic here
-
-    // Reset form
-    setLoginEmail("");
-    setPassword("");
-    setValidationError(false);
-    setShowRegistrationModal(false);
-  };
-  return (
+  return showRegistrationModal ? (
     <div className="fixed inset-0 flex items-center justify-center z-50 ">
       <div className="bg-white rounded-lg p-8">
         <button
           className="h-6 w-6 bg-red-800 text-white rounded-full"
-          onClick={closeModal}
+          onClick={() => setShowRegistrationModal(false)}
         >
           <svg
             className="flex justify-center "
@@ -78,15 +55,23 @@ const LoginModal = () => {
             ></path>
           </svg>
         </button>
-        <h2 className="text-2xl mb-4">Вхід на сайт</h2>
-        <form onSubmit={handleLoginSubmit}>
+        <h2 className="text-2xl mb-4">Реєстрація на сайті</h2>
+        <form onSubmit={formik.handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="loginEmail">Логін або email</label>
+            <label htmlFor="RegistrationEmail"> email</label>
             <input
               type="text"
-              id="loginEmail"
-              value={loginEmail}
-              onChange={(e) => setLoginEmail(e.target.value)}
+              id="registrationEmail"
+              {...formik.getFieldProps("email")}
+              className="w-full border-gray-300 border rounded-md px-3 py-2"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="loginEmail">Ваш логін </label>
+            <input
+              type="text"
+              id="loginNickname"
+              {...formik.getFieldProps("nickname")}
               className="w-full border-gray-300 border rounded-md px-3 py-2"
             />
           </div>
@@ -95,14 +80,13 @@ const LoginModal = () => {
             <input
               type="password"
               id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              {...formik.getFieldProps("password")}
               className="w-full border-gray-300 border rounded-md px-3 py-2"
             />
           </div>
-          {validationError && (
+          {formik.errors.password && (
             <p className="text-red-500 flex justify-start pb-4">
-              Неправильний Логін або пароль
+              Неправильний email або пароль
             </p>
           )}
           <div className="flex items-center justify-between mb-4">
@@ -123,7 +107,7 @@ const LoginModal = () => {
         </form>
       </div>
     </div>
-  );
+  ) : null;
 };
 
-export default LoginModal;
+export default RegistrationModal;

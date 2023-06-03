@@ -19,7 +19,7 @@ export const AuthProvider = (type: any) => {
         setUser(isUser);
         setLoading(false);
       } else {
-        signInWithPopup(auth, new EmailAuthProvider())
+        signInWithPopup(auth, new GoogleAuthProvider())
           .then((credentials) => {
             setUser(credentials.user);
             setLoading(false);

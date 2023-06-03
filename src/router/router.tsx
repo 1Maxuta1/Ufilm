@@ -11,6 +11,10 @@ export const router = createBrowserRouter([
     path: "/recover-password",
     element: <RecoverPassword />,
   },
+  {
+    path: "/profile",
+    element: null,
+  },
   // {
   //   path: "/films",
   //   element: <Films />,
