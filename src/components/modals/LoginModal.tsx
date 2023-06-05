@@ -35,8 +35,8 @@ const LoginModal = ({ showLoginModal, setShowLoginModal }: ILoginModal) => {
             fill="currentColor"
             strokeWidth="0"
             viewBox="0 0 24 24"
-            height="1em"
-            width="1em"
+            height="2em"
+            width="2em"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
